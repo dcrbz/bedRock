@@ -3,16 +3,16 @@ package bz.dcr.bedrock.common.pubsub.messages;
 import java.util.Date;
 import java.util.UUID;
 
-public class QuitEventMessageBody {
+public class ServerQuitEvent {
 
     private UUID playerId;
     private Date quitTime;
 
 
-    public QuitEventMessageBody() {
+    public ServerQuitEvent() {
     }
 
-    public QuitEventMessageBody(UUID playerId, Date quitTime) {
+    public ServerQuitEvent(UUID playerId, Date quitTime) {
         this.playerId = playerId;
         this.quitTime = quitTime;
     }

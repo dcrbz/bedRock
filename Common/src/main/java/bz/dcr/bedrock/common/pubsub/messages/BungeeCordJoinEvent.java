@@ -3,16 +3,16 @@ package bz.dcr.bedrock.common.pubsub.messages;
 import java.util.Date;
 import java.util.UUID;
 
-public class JoinEventMessageBody {
+public class BungeeCordJoinEvent {
 
     private UUID playerId;
     private Date joinTime;
 
 
-    public JoinEventMessageBody() {
+    public BungeeCordJoinEvent() {
     }
 
-    public JoinEventMessageBody(UUID playerId, Date joinTime) {
+    public BungeeCordJoinEvent(UUID playerId, Date joinTime) {
         this.playerId = playerId;
         this.joinTime = joinTime;
     }

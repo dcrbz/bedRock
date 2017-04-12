@@ -4,9 +4,9 @@ import bz.dcr.bedrock.common.config.ConfigKey;
 import bz.dcr.bedrock.common.db.Redis;
 import bz.dcr.bedrock.common.pubsub.BedRockSubscriber;
 import bz.dcr.bedrock.common.pubsub.Message;
-import bz.dcr.bedrock.common.pubsub.PubSubChannel;
-import bz.dcr.bedrock.common.pubsub.messages.JoinEventMessageBody;
-import bz.dcr.bedrock.common.pubsub.messages.QuitEventMessageBody;
+import bz.dcr.bedrock.common.pubsub.MessageChannel;
+import bz.dcr.bedrock.common.pubsub.messages.ServerJoinEvent;
+import bz.dcr.bedrock.common.pubsub.messages.ServerQuitEvent;
 import bz.dcr.bedrock.spigot.listeners.JoinQuitListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.JedisPoolConfig;
@@ -29,23 +29,23 @@ public class BedRockPlugin extends JavaPlugin {
         initRedis();
         registerListeners();
 
-        redis.subscribe(new BedRockSubscriber<JoinEventMessageBody>() {
+        redis.subscribe(new BedRockSubscriber<ServerJoinEvent>() {
             @Override
-            public void onMessage(Message<JoinEventMessageBody> message) {
-                JoinEventMessageBody body = message.getBody();
+            public void onMessage(Message<ServerJoinEvent> message) {
+                ServerJoinEvent body = message.getBody();
 
                 System.out.println(body.getPlayerId().toString() + " joined the server '" + message.getHeader().getSource() + "'.");
             }
-        }, PubSubChannel.JOIN_QUIT);
+        }, MessageChannel.JOIN_QUIT);
 
-        redis.subscribe(new BedRockSubscriber<QuitEventMessageBody>() {
+        redis.subscribe(new BedRockSubscriber<ServerQuitEvent>() {
             @Override
-            public void onMessage(Message<QuitEventMessageBody> message) {
-                QuitEventMessageBody body = message.getBody();
+            public void onMessage(Message<ServerQuitEvent> message) {
+                ServerQuitEvent body = message.getBody();
 
                 System.out.println(body.getPlayerId().toString() + " left the server '" + message.getHeader().getSource() + "'.");
             }
-        }, PubSubChannel.JOIN_QUIT);
+        }, MessageChannel.JOIN_QUIT);
     }
 
     @Override

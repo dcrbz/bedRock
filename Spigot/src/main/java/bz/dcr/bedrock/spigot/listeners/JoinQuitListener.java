@@ -1,12 +1,9 @@
 package bz.dcr.bedrock.spigot.listeners;
 
 import bz.dcr.bedrock.common.config.ConfigKey;
-import bz.dcr.bedrock.common.pubsub.Message;
-import bz.dcr.bedrock.common.pubsub.MessageHeader;
-import bz.dcr.bedrock.common.pubsub.MessageTargetType;
-import bz.dcr.bedrock.common.pubsub.PubSubChannel;
-import bz.dcr.bedrock.common.pubsub.messages.JoinEventMessageBody;
-import bz.dcr.bedrock.common.pubsub.messages.QuitEventMessageBody;
+import bz.dcr.bedrock.common.pubsub.*;
+import bz.dcr.bedrock.common.pubsub.messages.ServerJoinEvent;
+import bz.dcr.bedrock.common.pubsub.messages.ServerQuitEvent;
 import bz.dcr.bedrock.spigot.BedRockPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Date;
-import java.util.HashSet;
 
 public class JoinQuitListener implements Listener {
 
@@ -28,40 +24,42 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        MessageHeader header = new MessageHeader(
-                JoinEventMessageBody.class,
-                PubSubChannel.JOIN_QUIT,
-                plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME),
-                MessageTargetType.GLOBAL,
-                new HashSet<>()
-        );
-        JoinEventMessageBody body = new JoinEventMessageBody(
+        ServerJoinEvent body = new ServerJoinEvent(
                 event.getPlayer().getUniqueId(),
                 new Date()
         );
-        Message<JoinEventMessageBody> message = new Message<>(header, body);
+
+        MessageBuilder<ServerJoinEvent> builder = new MessageBuilder<>();
+        Message<ServerJoinEvent> message = builder
+                .type(ServerJoinEvent.class)
+                .channel(MessageChannel.JOIN_QUIT)
+                .source(plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME))
+                .global()
+                .body(body)
+                .build();
 
         // Publish message
-        plugin.getRedis().publish(PubSubChannel.JOIN_QUIT, message);
+        plugin.getRedis().publish(MessageChannel.JOIN_QUIT, message);
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        MessageHeader header = new MessageHeader(
-                QuitEventMessageBody.class,
-                PubSubChannel.JOIN_QUIT,
-                plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME),
-                MessageTargetType.GLOBAL,
-                new HashSet<>()
-        );
-        QuitEventMessageBody body = new QuitEventMessageBody(
+        ServerQuitEvent body = new ServerQuitEvent(
                 event.getPlayer().getUniqueId(),
                 new Date()
         );
-        Message<QuitEventMessageBody> message = new Message<>(header, body);
+
+        MessageBuilder<ServerQuitEvent> builder = new MessageBuilder<>();
+        Message<ServerQuitEvent> message = builder
+                .type(ServerQuitEvent.class)
+                .channel(MessageChannel.JOIN_QUIT)
+                .source(plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME))
+                .global()
+                .body(body)
+                .build();
 
         // Publish message
-        plugin.getRedis().publish(PubSubChannel.JOIN_QUIT, message);
+        plugin.getRedis().publish(MessageChannel.JOIN_QUIT, message);
     }
 
 }
