@@ -2,11 +2,6 @@ package bz.dcr.bedrock.spigot;
 
 import bz.dcr.bedrock.common.config.ConfigKey;
 import bz.dcr.bedrock.common.db.Redis;
-import bz.dcr.bedrock.common.pubsub.BedRockSubscriber;
-import bz.dcr.bedrock.common.pubsub.Message;
-import bz.dcr.bedrock.common.pubsub.MessageChannel;
-import bz.dcr.bedrock.common.pubsub.messages.ServerJoinEvent;
-import bz.dcr.bedrock.common.pubsub.messages.ServerQuitEvent;
 import bz.dcr.bedrock.spigot.listeners.JoinQuitListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.JedisPoolConfig;
@@ -27,25 +22,6 @@ public class BedRockPlugin extends JavaPlugin {
         saveDefaultConfig();
 
         initRedis();
-        registerListeners();
-
-        redis.subscribe(new BedRockSubscriber<ServerJoinEvent>() {
-            @Override
-            public void onMessage(Message<ServerJoinEvent> message) {
-                ServerJoinEvent body = message.getBody();
-
-                System.out.println(body.getPlayerId().toString() + " joined the server '" + message.getHeader().getSource() + "'.");
-            }
-        }, MessageChannel.JOIN_QUIT);
-
-        redis.subscribe(new BedRockSubscriber<ServerQuitEvent>() {
-            @Override
-            public void onMessage(Message<ServerQuitEvent> message) {
-                ServerQuitEvent body = message.getBody();
-
-                System.out.println(body.getPlayerId().toString() + " left the server '" + message.getHeader().getSource() + "'.");
-            }
-        }, MessageChannel.JOIN_QUIT);
     }
 
     @Override
@@ -79,11 +55,6 @@ public class BedRockPlugin extends JavaPlugin {
                     getConfig().getInt(ConfigKey.REDIS_TIMEOUT)
             );
         }
-    }
-
-
-    private void registerListeners() {
-        getServer().getPluginManager().registerEvents(new JoinQuitListener(this), this);
     }
 
 

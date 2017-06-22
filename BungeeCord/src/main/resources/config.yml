@@ -1,0 +1,7 @@
+Redis:
+  Host: 127.0.0.1
+  Port: 6379
+  Timeout: 5000
+  Auth:
+    Enabled: false
+    Password: test
