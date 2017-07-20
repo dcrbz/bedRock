@@ -29,7 +29,13 @@
         <!-- deinCraft Repository -->
         <repository>
             <id>deincraft</id>
-            <url>http://repo.dcr.bz/content/repositories/deincraft</url>
+            <url>https://repo.dcr.bz/artifactory/deincraft-releases</url>
+        </repository>
+
+        <!-- Spigot Repository -->
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
         </repository>
     </repositories>
 

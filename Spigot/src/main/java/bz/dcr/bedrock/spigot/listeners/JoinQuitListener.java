@@ -32,14 +32,14 @@ public class JoinQuitListener implements Listener {
         MessageBuilder<ServerJoinEvent> builder = new MessageBuilder<>();
         Message<ServerJoinEvent> message = builder
                 .type(ServerJoinEvent.class)
-                .channel(MessageChannel.JOIN_QUIT)
+                .channel(MessageChannel.SERVER_JOIN_QUIT)
                 .source(plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME))
                 .global()
                 .body(body)
                 .build();
 
         // Publish message
-        plugin.getRedis().publish(MessageChannel.JOIN_QUIT, message);
+        plugin.getRedis().publish(MessageChannel.SERVER_JOIN_QUIT, message);
     }
 
     @EventHandler
@@ -52,14 +52,14 @@ public class JoinQuitListener implements Listener {
         MessageBuilder<ServerQuitEvent> builder = new MessageBuilder<>();
         Message<ServerQuitEvent> message = builder
                 .type(ServerQuitEvent.class)
-                .channel(MessageChannel.JOIN_QUIT)
+                .channel(MessageChannel.SERVER_JOIN_QUIT)
                 .source(plugin.getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME))
                 .global()
                 .body(body)
                 .build();
 
         // Publish message
-        plugin.getRedis().publish(MessageChannel.JOIN_QUIT, message);
+        plugin.getRedis().publish(MessageChannel.SERVER_JOIN_QUIT, message);
     }
 
 }
