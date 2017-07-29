@@ -50,6 +50,10 @@ public class Redis implements Closeable {
         }
     }
 
+    public void publish(Message<?> message) {
+        publish(message.getHeader().getChannel(), message);
+    }
+
     public void subscribe(BedRockSubscriber subscriber, String... channels) {
         executorService.submit(() -> getResource().subscribe(subscriber, channels));
     }

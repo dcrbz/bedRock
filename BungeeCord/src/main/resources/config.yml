@@ -5,3 +5,4 @@ Redis:
   Auth:
     Enabled: false
     Password: test
+Server-ID: bungee0

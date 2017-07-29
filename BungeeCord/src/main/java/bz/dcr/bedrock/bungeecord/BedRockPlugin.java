@@ -1,5 +1,6 @@
 package bz.dcr.bedrock.bungeecord;
 
+import bz.dcr.bedrock.bungeecord.listener.JoinQuitListener;
 import bz.dcr.bedrock.bungeecord.utils.ConfigUtil;
 import bz.dcr.bedrock.common.config.ConfigKey;
 import bz.dcr.bedrock.common.db.Redis;
@@ -32,6 +33,7 @@ public class BedRockPlugin extends Plugin {
         }
 
         initRedis();
+        registerListeners();
     }
 
     @Override
@@ -73,9 +75,17 @@ public class BedRockPlugin extends Plugin {
         }
     }
 
+    private void registerListeners() {
+        getProxy().getPluginManager().registerListener(this, new JoinQuitListener(this));
+    }
+
 
     public Redis getRedis() {
         return redis;
+    }
+
+    public Configuration getConfig() {
+        return config;
     }
 
 
