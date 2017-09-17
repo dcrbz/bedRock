@@ -62,6 +62,10 @@ public class BedRockPlugin extends JavaPlugin {
         return redis;
     }
 
+    public String getServerId() {
+        return getConfig().getString(ConfigKey.GENERAL_BUNGEECORD_SERVER_NAME);
+    }
+
 
     public static BedRockPlugin getPlugin() {
         return plugin;
