@@ -29,8 +29,6 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onJoin(PostLoginEvent event) {
-        plugin.getLogger().info("PostLoginEvent");
-
         final BungeeCordJoinEvent body = new BungeeCordJoinEvent(event.getPlayer().getUniqueId(), new Date());
         Message<BungeeCordJoinEvent> message = new MessageBuilder<BungeeCordJoinEvent>()
                 .type(BungeeCordJoinEvent.class)
@@ -45,8 +43,6 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerDisconnectEvent event) {
-        plugin.getLogger().info("PlayerDisconnectEvent");
-
         final BungeeCordQuitEvent body = new BungeeCordQuitEvent(event.getPlayer().getUniqueId(), new Date());
         Message<BungeeCordQuitEvent> message = new MessageBuilder<BungeeCordQuitEvent>()
                 .type(BungeeCordQuitEvent.class)
@@ -62,8 +58,6 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onServerJoin(ServerConnectedEvent event) {
-        plugin.getLogger().info("ServerConnectedEvent");
-
         final ServerJoinEvent body = new ServerJoinEvent(event.getPlayer().getUniqueId(), new Date());
         Message<ServerJoinEvent> message = new MessageBuilder<ServerJoinEvent>()
                 .type(ServerJoinEvent.class)
@@ -78,8 +72,6 @@ public class JoinQuitListener implements Listener {
 
     @EventHandler
     public void onServerQuit(ServerDisconnectEvent event) {
-        plugin.getLogger().info("ServerDisconnectEvent");
-
         final ServerQuitEvent body = new ServerQuitEvent(event.getPlayer().getUniqueId(), new Date());
         Message<ServerQuitEvent> message = new MessageBuilder<ServerQuitEvent>()
                 .type(ServerQuitEvent.class)
