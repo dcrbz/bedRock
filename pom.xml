@@ -20,23 +20,12 @@
     </properties>
 
     <repositories>
-        <!-- BungeeCord Repository -->
-        <repository>
-            <id>bungeecord-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-
         <!-- deinCraft Repository -->
         <repository>
             <id>deincraft</id>
-            <url>https://repo.dcr.bz/artifactory/deincraft-releases</url>
+            <url>https://repo.deincraft.bz/artifactory/deincraft-repo</url>
         </repository>
 
-        <!-- Spigot Repository -->
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
-        </repository>
     </repositories>
 
     <build>
