@@ -25,7 +25,7 @@ public class MessageSerializer extends StdSerializer<Message> {
         gen.writeStringField("targetType", message.getHeader().getTargetType().name());
         gen.writeFieldName("targets");
         gen.writeStartArray();
-        for(String target : message.getHeader().getTargets()) {
+        for (String target : message.getHeader().getTargets()) {
             gen.writeString(target);
         }
         gen.writeEndArray();

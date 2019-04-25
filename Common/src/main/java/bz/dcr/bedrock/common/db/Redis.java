@@ -34,7 +34,7 @@ public class Redis implements Closeable {
     }
 
     public void close() throws IOException {
-        if(jedisPool != null)
+        if (jedisPool != null)
             jedisPool.close();
     }
 

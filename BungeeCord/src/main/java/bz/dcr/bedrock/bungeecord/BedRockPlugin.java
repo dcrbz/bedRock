@@ -59,7 +59,7 @@ public class BedRockPlugin extends Plugin {
 
         redis = new Redis(poolConfig);
 
-        if(config.getBoolean(ConfigKey.REDIS_AUTH_ENABLED)) {
+        if (config.getBoolean(ConfigKey.REDIS_AUTH_ENABLED)) {
             redis.connect(
                     config.getString(ConfigKey.REDIS_HOST),
                     config.getInt(ConfigKey.REDIS_PORT),

@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * Helper class to build Messages
+ *
  * @param <T> The type of the message body
  */
 public class MessageBuilder<T> {
@@ -65,6 +66,7 @@ public class MessageBuilder<T> {
 
     /**
      * Builds a message using the built header and body
+     *
      * @return A message containing the built header and body
      */
     public Message<T> build() {
