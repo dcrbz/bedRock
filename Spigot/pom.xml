@@ -15,6 +15,13 @@
         <spigot.version>1.15-R0.1-SNAPSHOT</spigot.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>bz.dcr</groupId>

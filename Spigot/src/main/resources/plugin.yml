@@ -1,4 +1,5 @@
 name: bedRock
 authors: [leNic]
 version: ${project.version}
+api-version: 1.15
 main: bz.dcr.bedrock.spigot.BedRockPlugin
