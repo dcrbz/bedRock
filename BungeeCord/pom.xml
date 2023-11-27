@@ -12,8 +12,15 @@
     <artifactId>bedrock-bungeecord</artifactId>
 
     <properties>
-        <bungeecord.version>1.15-SNAPSHOT</bungeecord.version>
+        <bungeecord.version>1.20-R0.1</bungeecord.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
